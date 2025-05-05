@@ -1,0 +1,134 @@
+
+html, body {
+  @apply h-full m-0 p-0 overflow-hidden;
+}
+
+.fixed-sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  transform: translateZ(0);
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.fixed-sidebar .ant-layout-sider-trigger {
+  display: none;
+}
+
+.fixed-sidebar.collapsed {
+  @apply -translate-x-full w-[80px];
+}
+
+.fixed-sidebar-content {
+  @apply transition-all duration-300 ease-in-out;
+  transform: translateX(0);
+  opacity: 1;
+}
+
+.custom-menu .ant-menu-item {
+  transition: background-color 0.3s ease;
+}
+
+.custom-menu .ant-menu-item:hover {
+  background-color: #219cee !important;
+  color: #fff !important;
+}
+
+
+.fixed-sidebar:not(.collapsed) .custom-menu .ant-menu-item {
+  transform: translateX(0);
+  opacity: 1;
+  transition: none;
+}
+
+.fixed-sidebar.collapsed .custom-menu .ant-menu-item {
+  transform: translateX(20px);
+  opacity: 0;
+}
+
+
+.fixed-sidebar {
+  @apply w-[10px]; 
+}
+
+@media (min-width: 480px) {
+  .fixed-sidebar {
+    @apply w-[180px];
+  }
+
+  .logo {
+    @apply h-[45px] text-[14px] px-[10px];
+  }
+
+  .web-logo {
+    @apply h-[50px] w-[50px];
+  }
+
+  .ant-menu-item {
+    @apply text-[14px];
+  }
+
+  .fixed-sidebar.collapsed .web-logo {
+    @apply h-[auto];
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1023px) {
+  .fixed-sidebar {
+    @apply w-[180px];
+  }
+
+  .logo {
+    @apply h-[50px] text-[16px];
+  }
+
+  .web-logo {
+    @apply h-[60px] w-[60px];
+  }
+}
+
+@media (min-width: 1024px) {
+  .fixed-sidebar {
+    @apply w-[250px];
+  }
+
+  .logo {
+    @apply h-[64px] text-[18px];
+  }
+
+  .web-logo {
+    @apply h-[90px] w-[95px];
+  }
+}
+
+
+.logo {
+  @apply h-[64px] flex items-center justify-center text-white text-[18px] font-bold bg-[#001529] my-[10px] px-[15px] transition-all duration-300 ease-in-out;
+}
+
+
+.fixed-sidebar .ant-menu {
+  @apply flex flex-col flex-1 transition-colors duration-300 ease-in-out;
+}
+
+.fixed-sidebar .ant-menu:last-child {
+  @apply mt-auto;
+}
+
+.ant-menu-item-selected {
+  background-color: rgba(24, 144, 255, 0.5) !important;
+  transition: background-color 0.3s ease-in-out;
+}
+
+
+.web-logo {
+  @apply h-[90px] w-[95px] ml-[-10px] flex justify-center transition-all duration-300 ease-in-out;
+}
+
+.fixed-sidebar.collapsed .web-logo {
+  @apply h-[84px];
+}

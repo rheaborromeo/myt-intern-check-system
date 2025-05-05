@@ -1,0 +1,51 @@
+.login-container {
+  @apply flex items-center justify-center min-h-screen;
+}
+
+.login-form-container {
+  @apply w-full sm:w-[400px] min-h-[480px] flex flex-col justify-center p-10 border border-gray-300 rounded-lg bg-white shadow-lg text-center;
+}
+.login-button {
+  @apply w-full mt-4 mb-2;
+}
+
+@media (max-width: 480px) {
+  .login-form-container {
+    @apply px-6; 
+    width: 320px; 
+    height: 410px;
+  }
+
+  .login-logo {
+    @apply w-36 h-12;
+  }
+
+  .input-field {
+    @apply w-full p-3 border border-gray-300 rounded-md text-base;
+     min-height: 45px;
+  }
+
+  .login-button {
+    @apply w-full mt-4 mb-2;
+  }
+
+  .admin-login-link {
+    @apply text-sm mt-2;
+  }
+}
+
+@media (min-width: 768px) {
+  .login-form-container {
+    @apply w-[400px] min-h-[480px];
+  }
+}
+
+@media (min-width: 1024px) {
+  .login-form-container {
+    @apply w-[450px] min-h-[520px];
+  }
+
+  .login-logo {
+    @apply w-48 h-16;
+  }
+}

@@ -1,0 +1,80 @@
+.log-overlay-container {
+  @apply flex justify-center items-center min-h-screen p-5;
+}
+
+.log-box-container {
+  @apply flex flex-col items-center justify-start bg-white p-10 rounded-lg shadow-xl text-center w-full max-w-screen-2xl h-auto;
+}
+
+.log-attendance-image {
+  width: 318px;
+  height: auto;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.close-button {
+  @apply absolute top-2 right-2 text-gray-500;
+}
+
+.clock-display {
+  @apply flex justify-center items-center mt-3 mb-4 text-xl font-semibold;
+  margin-top: 0;
+}
+
+.session-class {
+  @apply mb-6 text-lg text-gray-700 font-medium capitalize;
+}
+
+.time-buttons {
+  @apply flex flex-col items-center gap-5;
+}
+
+@media (max-width: 1024px) {
+  .log-box-container {
+    @apply w-[100%] max-w-[900px] p-8;
+    height: auto;
+  }
+  .log-attendance-image {
+    width: 40%;
+  }
+}
+
+@media (max-width: 768px) {
+  .log-box-container {
+    @apply w-[100%] max-w-[900px] p-8;
+    height: auto;
+  }
+  .log-attendance-image {
+    width: 60%;
+  }
+}
+
+@media (max-width: 480px) {
+  .log-box-container {
+    @apply w-[100%] max-w-[400px] p-6;
+  }
+  .log-attendance-image {
+    width: 70%;
+  }
+}
+
+@media (max-width: 360px) {
+  .log-box-container {
+    @apply w-[100%] max-w-[500px] p-4;
+  }
+  .log-attendance-image {
+    width: 70%;
+  }
+}
+
+.time-buttons {
+  margin-top: 10px;
+}
+
+.time-buttons button {
+  height: 3rem;
+  width: 10rem;
+  font-size: 1rem;
+}

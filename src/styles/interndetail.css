@@ -1,0 +1,404 @@
+.dtr-container {
+  width: 100vw; 
+  height: 100vh;
+  overflow-y: auto; 
+ 
+  background-color: #f4f4f4;
+  display: flex;
+  justify-content: center;
+}
+.intern-pagination-container {
+  display: flex;
+  justify-content: flex-end;
+  text-align: center;
+  margin-top: 3rem;
+}
+
+.dtr-paper {
+  background: white;
+  position: relative;
+  padding: 2rem;
+  height: fit-content;
+  width: 100%;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.close-icon-container {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  z-index: 10; 
+}
+
+.close-icon-container svg {
+  cursor: pointer;
+}
+
+.dtr-setup-col {
+  width: 100px;
+  min-width: 80px;
+}
+
+.dtr-morning-col,
+.dtr-afternoon-col {
+  width: 190px;
+}
+
+.dtr-time-col {
+  width: 80px;
+}
+
+.dtr-header-text h2 {
+  font-size: 16px;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 0.5rem;
+}
+
+.dtr-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1rem;
+  padding-bottom: 0.5rem;
+}
+
+.dtr-logo {
+  @apply w-32 h-auto mr-1 pr-2.5;
+}
+
+.dtr-title {
+  text-align: center;
+  margin: 2rem 0;
+  font-size: 20px;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.dtr-date-col {
+  width: 150px; 
+  min-width: 120px;
+}
+.dtr-hours-col {
+  width: 100px;
+  min-width: 80px;
+}
+
+.dtr-info-value {
+  margin-top: 0.25rem;
+  padding-top: 0.25rem;
+  min-height: 1.2rem;
+}
+
+.dtr-info-cell {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  border-right: #1f1f1f 1px solid;
+  border-bottom: #1f1f1f 1px solid;
+  padding: 0.25rem 0.5rem;
+  min-height: 40px; 
+  box-sizing: border-box;
+}
+
+.dtr-info-value {
+  margin-top: 0.25rem;
+  padding-top: 0;
+  min-height: unset;
+}
+
+.dtr-info-table {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0; 
+  margin-bottom: 1.5rem;
+  font-size: 15px;
+  border-left: #1f1f1f 1px solid;
+  border-top: #1f1f1f 1px solid;
+}
+
+.dtr-record-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+}
+
+.dtr-record-table th,
+.dtr-record-table td {
+  border: 1px solid #1f1f1f;
+  padding: 6px;
+  text-align: center;
+  vertical-align: middle;
+}
+
+.go-back-container {
+  margin-bottom: 20px;
+}
+
+.go-back-button {
+  background-color: #f4f4f4;
+  border: none;
+  padding: 8px 16px;
+  cursor: pointer;
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+}
+
+.go-back-button:hover {
+  background-color: #ddd;
+}
+
+.go-back-button svg {
+  margin-right: 8px;
+}
+
+@media (max-width: 1024px) {
+.dtr-paper {
+  width: 100%;
+  padding: 1.5rem;
+  box-sizing: border-box;
+}
+
+.dtr-title {
+  font-size: 18px;
+  margin: 1.5rem 0;
+}
+
+.dtr-header-text h2 {
+  font-size: 15px;
+}
+
+.dtr-info-table {
+  grid-template-columns: 1fr;
+  font-size: 14px;
+}
+
+.dtr-record-table {
+  font-size: 13px;
+}
+
+.dtr-logo {
+  @apply w-32 h-auto mr-1 pr-2.5;
+}
+
+.go-back-button {
+  font-size: 15px;
+  padding: 6px 12px;
+}
+
+.dtr-setup-col,
+.dtr-morning-col,
+.dtr-afternoon-col,
+.dtr-time-col,
+.dtr-date-col,
+.dtr-hours-col {
+  width: auto;
+  min-width: unset;
+}
+
+.dtr-header {
+  display: flex;
+  flex-direction: column; 
+  align-items: center; 
+  text-align: center; 
+  margin-bottom: 1rem;
+  padding-bottom: 0.5rem;
+}
+
+.dtr-logo {
+  margin-right: 0; 
+  margin-bottom: 1rem; 
+}
+}
+@media (max-width: 768px) {
+  .dtr-paper {
+    width: 100%;
+    padding: 1.5rem;
+    box-sizing: border-box;
+  }
+  
+  .dtr-title {
+    font-size: 18px;
+    margin: 1.5rem 0;
+  }
+  
+  .dtr-header-text h2 {
+    font-size: 15px;
+  }
+  
+  .dtr-info-table {
+    grid-template-columns: 1fr;
+    font-size: 14px;
+  }
+  
+  .dtr-record-table {
+    font-size: 13px;
+  }
+  
+  .dtr-logo {
+    @apply w-32 h-auto mr-1 pr-2.5;
+  }
+  
+  .go-back-button {
+    font-size: 15px;
+    padding: 6px 12px;
+  }
+  
+  .dtr-setup-col,
+  .dtr-morning-col,
+  .dtr-afternoon-col,
+  .dtr-time-col,
+  .dtr-date-col,
+  .dtr-hours-col {
+    width: auto;
+    min-width: unset;
+  }
+  
+  .dtr-header {
+    display: flex;
+    flex-direction: column; 
+    align-items: center; 
+    text-align: center; 
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+  }
+  
+  .dtr-logo {
+    margin-right: 0; 
+    margin-bottom: 1rem; 
+  }
+  }
+  
+
+@media (max-width: 480px) {
+.dtr-paper {
+  padding: 1rem;
+  height: fit-content;
+}
+.intern-pagination-container {
+  margin-top: 0.7rem;
+  margin-bottom: 2rem;
+}
+
+.dtr-title {
+  font-size: 16px;
+  margin: 1rem 0;
+}
+.dtr-company-name {
+  font-size: 16px;
+}
+.dtr-company-address {
+  font-size: 11px;
+  word-break: break-word;
+  padding-inline: 1.5rem;
+}
+
+.dtr-info-table {
+  font-size: 13px;
+  line-height: 1.2;
+}
+
+.dtr-record-table {
+  font-size: 11px;
+  line-height: 1.2;
+}
+
+.dtr-logo {
+  width: 60px;
+  margin-top: 1rem;
+}
+
+.go-back-button {
+  font-size: 14px;
+  padding: 5px 10px;
+}
+
+.close-icon-container {
+  top: 5px;
+  right: 5px;
+}
+
+.dtr-table-wrapper {
+  overflow-x: auto;
+  height: 400px;
+}
+
+.dtr-header {
+  flex-direction: column; 
+  align-items: center; 
+  text-align: center;
+  margin-bottom: 1rem;
+  padding-bottom: 0.5rem;
+}
+
+.dtr-logo {
+  @apply w-32 h-auto mr-1 pr-2.5 pt-0.5
+}
+}
+
+@media (max-width: 480px) {
+.dtr-paper {
+  padding: 1rem;
+  height: fit-content;
+}
+.intern-pagination-container {
+  margin-top: 0.7rem;
+  margin-bottom: 2rem;
+}
+
+.dtr-title {
+  font-size: 16px;
+  margin: 1rem 0;
+}
+.dtr-company-name {
+  font-size: 16px;
+}
+.dtr-company-address {
+  font-size: 11px;
+  word-break: break-word;
+  padding-inline: 1.5rem;
+}
+
+.dtr-info-table {
+  font-size: 13px;
+  line-height: 1.2;
+}
+
+.dtr-record-table {
+  font-size: 11px;
+  line-height: 1.2;
+}
+
+.dtr-logo {
+  width: 60px;
+  margin-top: 1rem;
+}
+
+.go-back-button {
+  font-size: 14px;
+  padding: 5px 10px;
+}
+
+.close-icon-container {
+  top: 5px;
+  right: 5px;
+}
+
+.dtr-table-wrapper {
+  overflow-x: auto;
+  height: 400px;
+}
+
+.dtr-header {
+  flex-direction: column; 
+  align-items: center; 
+  text-align: center;
+  margin-bottom: 1rem;
+  padding-bottom: 0.5rem;
+}
+
+.dtr-logo {
+  @apply w-32 h-auto mr-1 pr-2.5 pt-0.5
+}
+}

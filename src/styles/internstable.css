@@ -1,0 +1,231 @@
+body {
+  overflow-y: auto;
+}
+
+.list-record-container {
+  @apply w-screen flex justify-end min-h-screen overflow-x-hidden;
+}
+
+.list-record-container.expanded .list-dashboard-content,
+.list-record-container.collapsed .list-dashboard-content {
+  @apply ml-[6vw];
+}
+
+.list-attendance-table .ant-table-thead > tr > th::before,
+.list-attendance-table .ant-table-thead > tr > th::after {
+  display: none !important;
+}
+
+.list-table-wrapper {
+  @apply w-full overflow-y-auto overflow-x-auto;
+  max-height: calc(100vh - 350px); /* Adjust this if needed */
+}
+
+.list-dashboard-content {
+  @apply flex-grow p-5 flex flex-col w-screen min-h-screen transition-all duration-300 ease-in-out;
+  overflow-y: hidden; /* Prevent whole page from scrolling */
+}
+
+.list-header-container {
+  @apply flex items-center;
+}
+
+.list-header-text h2,
+.list-company-name {
+  @apply text-base font-bold text-gray-800 mb-0;
+}
+
+.list-header-text p,
+.list-company-address {
+  @apply text-base font-normal text-gray-800 mb-0;
+}
+
+.list-myt-logo {
+  @apply w-32 h-auto mr-6 mt-2.5;
+}
+
+.list-title-header {
+  @apply text-lg font-bold uppercase mt-8 text-center;
+}
+
+.button-container {
+  @apply flex justify-end mb-2.5 mr-5 w-full;
+}
+
+.button-container button {
+  @apply px-2 h-[42px] py-2.5 text-base;
+}
+
+.list-attendance-table .ant-table {
+  @apply w-full table-auto min-w-[700px] text-center border border-gray-300;
+}
+
+.list-attendance-table .ant-table-thead > tr > th {
+  @apply bg-[#052769] text-gray-100 border border-gray-300 text-center font-normal p-3 align-middle whitespace-normal;
+}
+
+.list-attendance-table .ant-table-tbody > tr > td {
+  @apply border-b border-gray-200 text-center font-normal p-3 align-middle whitespace-normal;
+}
+
+.list-attendance-table .ant-table-tbody > tr:hover > td {
+  @apply bg-gray-100;
+}
+
+.list-record-container.expanded .list-dashboard-content {
+  @apply ml-[15vw];
+}
+
+.list-record-container.collapsed .list-dashboard-content {
+  @apply ml-[6vw];
+}
+
+/* ---------- MEDIA QUERIES ---------- */
+
+@media (max-width: 1280px) {
+  .list-record-container.expanded .list-dashboard-content {
+    @apply ml-[18vw] mr-[2vw];
+  }
+  .list-record-container.collapsed .list-dashboard-content {
+    @apply ml-[8vw] mr-[2vw];
+  }
+
+  .list-dashboard-content {
+    @apply p-2 m-0;
+  }
+
+  .list-title-header {
+    @apply text-base mt-4 mb-0;
+  }
+
+  .list-header-text h2 {
+    @apply text-base font-semibold;
+  }
+
+  .list-header-text p {
+    @apply text-sm;
+  }
+
+  .list-myt-logo {
+    @apply w-40 h-auto;
+  }
+
+  .list-header-container {
+    @apply mt-4;
+  }
+}
+
+@media (max-width: 1024px) {
+  .list-record-container.expanded .list-dashboard-content {
+    @apply ml-[26vw] mr-[5vw] overflow-x-hidden;
+  }
+  .list-record-container.collapsed .list-dashboard-content {
+    @apply ml-[10vw] mr-[2vw];
+  }
+
+  .list-dashboard-content {
+    @apply p-2 m-0;
+  }
+
+  .list-header-text h2 {
+    @apply text-base font-semibold;
+  }
+
+  .list-header-text p {
+    @apply text-sm;
+  }
+
+  .list-myt-logo {
+    @apply w-40 h-auto;
+  }
+
+  .button-container {
+    @apply flex justify-center items-center w-full mb-2 mt-2;
+  }
+
+  .button-container button {
+    @apply w-28 h-11 px-3 text-base mt-2;
+  }
+
+  .list-title-header {
+    @apply text-base mt-0;
+  }
+
+  .ant-pagination {
+    @apply mt-4;
+  }
+
+  .list-header-container {
+    @apply mt-4 mb-4;
+  }
+}
+
+@media (max-width: 768px) {
+  .list-record-container.expanded .list-dashboard-content {
+    @apply ml-[36vw] mr-[5vw] overflow-x-hidden;
+  }
+  .list-record-container.collapsed .list-dashboard-content {
+    @apply ml-[0];
+  }
+
+  .list-header-container {
+    @apply flex-col justify-center items-center text-center mt-4 mb-4;
+  }
+
+  .list-header-text h2 {
+    @apply text-sm font-semibold;
+  }
+
+  .list-header-text p {
+    @apply text-xs;
+  }
+
+  .list-myt-logo {
+    @apply w-36 h-auto;
+  }
+
+  .button-container {
+    @apply flex justify-center items-center w-full mb-2;
+  }
+
+  .button-container button {
+    @apply w-24 h-10 px-2.5 text-sm;
+  }
+
+  .list-title-header {
+    @apply text-sm mt-0;
+  }
+}
+
+@media (max-width: 480px) {
+  .list-record-container.expanded .list-dashboard-content {
+    @apply ml-[56vw] mr-[5vw] overflow-x-hidden;
+  }
+  .list-record-container.collapsed .list-dashboard-content {
+    @apply ml-[0];
+  }
+
+  .button-container {
+    @apply flex justify-center items-center w-full my-2.5;
+  }
+
+  .button-container button {
+    @apply w-20 h-9 px-2 text-xs;
+  }
+
+  .list-title-header {
+    @apply text-xs mt-0;
+  }
+
+  .list-header-container.expanded-sidebar {
+    margin-top: 2.5rem;
+  }
+
+  .list-header-container {
+    margin-top: 2.5rem;
+  }
+
+  .list-myt-logo {
+    @apply mr-0 ml-0 mt-2.5;
+  }
+}

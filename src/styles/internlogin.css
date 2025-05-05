@@ -1,0 +1,117 @@
+.intern-login-container {
+  @apply flex justify-center items-center min-h-screen p-4; 
+}
+
+.intern-form-container {
+  @apply bg-white border border-gray-200 rounded-lg shadow-lg flex flex-col justify-center w-full p-6 sm:p-8;
+  max-width: 800px;
+  min-width: 0;
+  width: 420px;
+  height: 480px; 
+  box-sizing: border-box;
+}
+
+@media (max-width: 480px) {
+  .intern-form-container {
+    @apply px-6; 
+    width: 360px; 
+    height: 410px;
+  }
+}
+
+.login-logo {
+  @apply mx-auto mb-6 w-32 sm:w-40 h-16 object-contain;
+}
+
+.admin-login-link {
+  @apply text-center mt-8 sm:mt-12;
+}
+
+.input-field {
+  @apply w-full p-3 border border-gray-300 rounded-md text-base;
+  min-height: 45px;
+}
+
+.ant-form-item {
+  margin-bottom: 24px;
+}
+
+.ant-form-item-explain {
+  min-height: 22px;
+  display: block;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+}
+
+.btn-login {
+  @apply mt-4 py-4 sm:py-5 text-white bg-blue-600 hover:bg-blue-700 rounded-md text-base sm:text-lg;
+}
+
+@media (max-width: 768px) {
+  .intern-form-container {
+    @apply px-16; 
+  }
+}
+
+.login-logo {
+  @apply mx-auto mb-6 w-32 sm:w-40 h-16 object-contain;
+}
+
+.admin-login-link {
+  @apply text-center mt-8 sm:mt-12;
+}
+
+.input-field {
+  @apply w-full p-3 border border-gray-300 rounded-md text-base;
+  min-height: 45px;
+}
+
+.ant-form-item {
+  margin-bottom: 24px;
+}
+
+.ant-form-item-explain {
+  min-height: 22px;
+  display: block;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+}
+
+.btn-login {
+  @apply mt-4 py-4 sm:py-5 text-white bg-blue-600 hover:bg-blue-700 rounded-md text-base sm:text-lg;
+}
+
+@media (max-width: 1024px) {
+  .intern-form-container {
+    max-width: 80%;
+    @apply px-10; 
+  }
+}
+
+.login-logo {
+  @apply mx-auto mb-6 w-36 sm:w-40 h-16 object-contain;
+}
+
+.admin-login-link {
+  @apply text-center mt-8 sm:mt-12;
+}
+
+.input-field {
+  @apply w-full p-3 border border-gray-300 rounded-md text-base;
+  min-height: 45px;
+}
+
+.ant-form-item {
+  margin-bottom: 24px;
+}
+
+.ant-form-item-explain {
+  min-height: 22px;
+  display: block;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+}
+
+.btn-login {
+  @apply mt-4 py-4 sm:py-5 text-white bg-blue-600 hover:bg-blue-700 rounded-md text-base sm:text-lg;
+}

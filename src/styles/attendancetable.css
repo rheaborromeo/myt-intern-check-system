@@ -1,0 +1,262 @@
+
+html, body {
+  @apply h-full m-0 p-0 overflow-hidden;
+}
+
+.attendance-layout {
+  @apply min-h-screen w-screen overflow-x-hidden overflow-y-hidden bg-white;
+}
+
+.attendance-container {
+  @apply flex flex-row justify-center min-h-screen overflow-y-auto w-screen transition-all duration-300 ease-in-out;
+}
+.attendance-container.expanded .attendance-paper {
+  margin-left: 15vw;
+}
+.attendance-container.collapsed .attendance-paper {
+  @apply ml-[4vw];
+  margin-left: 4vw;
+}
+
+.attendance-paper {
+  @apply relative w-full max-w-full bg-white p-8 transition-all duration-300 ease-in-out;
+}
+
+.attendance-header {
+  @apply flex items-center;
+}
+.attendance-header-text h2 {
+  @apply text-base font-bold text-[#333] mb-0;
+}
+.attendance-header-text p,
+.attendance-comp-address {
+  @apply text-base font-normal text-gray-800 mb-0;
+}
+.attendance-logo {
+  @apply w-32 h-auto mr-6 mt-2.5;
+}
+.attendance-title {
+  @apply text-lg font-bold uppercase mt-8 text-center;
+}
+
+.attendance-button-container {
+  @apply flex justify-end mb-4 mt-0;
+}
+.attendance-button-container button,
+.print-button button {
+  @apply h-[42px] px-4 text-base rounded cursor-pointer;
+}
+.print-button button {
+  @apply w-full;
+}
+
+.attendance-table-wrapper {
+  @apply w-full max-w-full overflow-x-hidden overflow-y-auto max-h-[52vh] m-0 p-0;
+}
+.attendance-record-table {
+  @apply w-full table-fixed text-[16px] border-collapse;
+}
+.attendance-record-table th,
+.attendance-record-table td {
+  @apply border border-gray-300 p-1.5 text-center align-middle whitespace-nowrap;
+  min-width: auto !important;
+}
+.attendance-record-table th {
+  @apply text-center !important;
+}
+
+.attendance-record-table .ant-table {
+  width: 100% !important;
+  min-width: 100% !important;
+  overflow-x: hidden !important;
+}
+.attendance-record-table .ant-table-thead > tr > th {
+  @apply bg-[#052769] text-white font-normal leading-[1.2];
+}
+.attendance-record-table .ant-table-thead > tr > th::before,
+.attendance-record-table .ant-table-thead > tr > th::after {
+  display: none !important;
+}
+
+.attendance-record-table::-webkit-scrollbar {
+  height: 8px;
+  width: 8px;
+}
+.attendance-record-table::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+.attendance-record-table::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 10px;
+}
+.attendance-record-table::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+.pagination-container {
+  @apply flex items-center justify-end gap-2 py-2 my-0 flex-wrap;
+  transform: translateY(0);
+}
+.pagination-container .ant-pagination-item,
+.pagination-container .ant-pagination-prev,
+.pagination-container .ant-pagination-next {
+  transform: translateY(-3px) !important;
+}
+.ant-pagination-options {
+  @apply flex items-center;
+}
+
+.total-hours-container {
+  @apply flex justify-end p-2 mt-[1vh];
+}
+
+@media (max-width: 1280px) {
+  .attendance-container {
+    @apply w-[90vw];
+  }
+  .attendance-paper {
+    @apply max-w-full scale-100 origin-top;
+  }
+  .attendance-record-table th,
+  .attendance-record-table td {
+    @apply p-2;
+  }
+  .attendance-title {
+    @apply text-base mb-2.5;
+  }
+  .attendance-button-container {
+    @apply justify-center mt-4;
+  }
+  .pagination-container {
+    @apply justify-end flex-nowrap;
+  }
+  .attendance-table-wrapper {
+    @apply max-h-[50vh];
+  }
+  .attendance-table-wrapper {
+    @apply max-h-[50vh] overflow-x-auto overflow-y-auto;
+  }
+}
+
+@media (max-width: 1024px) {
+  .attendance-container {
+    @apply w-[90vw];
+  }
+  .attendance-paper {
+    @apply max-w-full scale-100 origin-top;
+  }
+  .attendance-record-table th,
+  .attendance-record-table td {
+    @apply p-2;
+  }
+  .attendance-button-container {
+    @apply justify-center mt-4;
+  }
+  .attendance-container.expanded .attendance-paper {
+    margin-left: 18vw;
+  }
+  .attendance-container.collapsed .attendance-paper {
+    margin-left: 5vw;
+  }
+  .attendance-table-wrapper {
+    @apply max-h-[50vh] overflow-x-auto overflow-y-auto;
+  }
+}
+
+
+@media (max-width: 768px) {
+  .attendance-container {
+    @apply w-[90vw];
+  }
+  .attendance-header {
+    @apply flex-col items-center text-center;
+  }
+  .attendance-title {
+    @apply text-base;
+  }
+  .attendance-paper {
+    @apply max-w-full scale-100 origin-top;
+  }
+  .attendance-button-container {
+    @apply justify-center;
+  }
+  .attendance-container.expanded .attendance-paper {
+    margin-left: 18vw;
+    overflow-y: auto;
+  }
+  .attendance-container.collapsed .attendance-paper {
+    margin-left: 0 !important;
+  }
+  .attendance-table-wrapper {
+    @apply w-full max-w-full overflow-x-auto overflow-y-auto max-h-[40vh] m-0 p-0;
+  }
+}
+
+@media (max-width: 480px) {
+  html, body {
+    @apply h-full overflow-hidden;
+  }
+
+  .attendance-container {
+    @apply w-screen;
+  }
+
+  .attendance-paper {
+    @apply max-w-full ml-0 scale-100 origin-top overflow-hidden;
+  }
+
+  .attendance-header {
+    @apply flex-col items-center text-center mt-4;
+  }
+
+  .attendance-company-name {
+    @apply text-base text-[#333] pt-1;
+  }
+
+  .attendance-table-wrapper {
+    @apply w-full max-w-[1000px] max-h-[40vh] overflow-y-auto m-0 p-0 overflow-x-auto;
+  }
+
+  .attendance-record-table,
+  .attendance-record-table .ant-table-thead > tr > th {
+    @apply text-xs;
+  }
+
+  .attendance-record-table th,
+  .attendance-record-table td {
+    @apply text-xs p-1 leading-[1.1];
+  }
+
+  .attendance-header-text p,
+  .attendance-header-text h2,
+  .total-hours-container h3,
+  .attendance-title {
+    @apply text-sm;
+  }
+
+  .attendance-title {
+    @apply text-lg font-bold uppercase mt-3 text-center;
+  }
+
+  .attendance-button-container {
+    @apply justify-center mt-4;
+  }
+
+  .pagination-container {
+    @apply justify-start py-4 my-0 gap-0 flex-wrap;
+  }
+  .pagination-container .ant-pagination-item,
+  .pagination-container .ant-pagination-prev,
+  .pagination-container .ant-pagination-next {
+    transform: translateY(-8px) !important;
+  }
+
+  .attendance-container.expanded .attendance-paper {
+    margin-left: 52vw;
+    overflow-y: auto;
+  }
+
+  .attendance-container.collapsed .attendance-paper {
+    margin-left: 0;
+  }
+}

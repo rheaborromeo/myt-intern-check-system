@@ -1,0 +1,322 @@
+html, body {
+  @apply h-full m-0 p-0 overflow-x-hidden overflow-y-hidden box-border bg-white;
+}
+
+.admin-dashboard-container {
+  @apply w-screen flex flex-row justify-center min-h-screen;
+}
+
+.admin-dashboard-container.expanded .admin-dashboard-content {
+  @apply ml-[15vw];
+}
+
+.admin-dashboard-container.collapsed .admin-dashboard-content {
+  @apply ml-[6vw];
+}
+
+.admin-dashboard-content {
+  @apply flex-grow p-5 flex flex-col w-screen min-h-screen transition-all duration-300 ease-in-out;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.admin-header-text h2 {
+  @apply text-base font-bold text-gray-800 mb-0;
+}
+
+.admin-header-text p {
+  @apply text-base font-normal text-gray-800 mb-0;
+}
+
+.admin-myt-logo {
+  @apply w-32 h-auto mr-6 mt-5 mb-1;
+}
+
+.select-all-and-buttons {
+  @apply flex items-center gap-4 mb-4;
+}
+
+.admin-title-header  {
+  @apply text-center text-lg font-bold uppercase;
+  margin-top: 2rem !important;  
+}
+
+.admin-header-container {
+  @apply flex items-center; 
+}
+
+.admin-dashboard-content {
+  @apply flex-grow p-5 flex flex-col w-screen min-h-screen;
+}
+
+.fixed-sidebar.collapsed {
+  @apply -translate-x-full w-[80px];
+}
+
+.fixed-sidebar .ant-layout-sider-trigger {
+  display: none;
+}
+
+.fixed-sidebar-content {
+  @apply transition-all duration-300 ease-in-out;
+  transform: translateX(0);
+  opacity: 1;
+}
+.fixed-sidebar.collapsed .fixed-sidebar-content {
+  transform: translateX(-10px);
+  opacity: 0;
+}
+
+.ant-table {
+  @apply w-full text-center;
+}
+
+.ant-table-thead > tr > th,
+.ant-table-tbody > tr > td {
+  @apply text-center font-normal;
+}
+
+.admin-monitoring-table .ant-table {
+  @apply w-full border-spacing-0 border border-gray-300;
+  table-layout: fixed;
+}
+
+.admin-monitoring-table .ant-table-thead > tr > th {
+  @apply text-center font-normal border-0 shadow-none;
+}
+
+.admin-monitoring-table .ant-table-thead > tr > th {
+  @apply bg-[#052769] text-white border-[1px] border-gray-300 shadow-none font-normal py-4 px-1.5 leading-5 break-words whitespace-normal align-middle text-center;
+}
+
+.admin-monitoring-table .ant-table-thead > tr > th::before {
+  @apply hidden;
+}
+
+.admin-monitoring-table-wrapper {
+  @apply overflow-y-auto max-h-[50vh];
+}
+
+@media (max-width: 1024px) {
+  html, body {
+    @apply h-full overflow-x-auto overflow-y-auto;
+  }
+  .admin-dashboard-container.expanded .admin-dashboard-content {
+    @apply ml-[20vw];
+  }
+  .admin-dashboard-container.collapsed .admin-dashboard-content {
+    @apply ml-[6vw];
+  }
+  .admin-monitoring-table-wrapper {
+    @apply overflow-x-auto max-h-[50vh];
+  }
+  .admin-monitoring-table .ant-table {
+    @apply min-w-[900px];
+  }
+  .admin-dashboard-container {
+    @apply w-[90vw] flex flex-row justify-center min-h-screen;
+  }
+  .admin-myt-logo {
+    @apply w-40 h-auto;
+  }
+}
+
+@media (max-width: 768px) {
+  html, body {
+    @apply h-full overflow-hidden;
+  }
+  .admin-dashboard-container.expanded .admin-dashboard-content {
+    @apply ml-[40vw] mr-[5vw];
+  }
+  .admin-dashboard-container.collapsed .admin-dashboard-content {
+    @apply ml-[6vw];
+  }
+  .ant-table {
+    @apply overflow-x-auto min-w-[500px];
+  }
+  .admin-monitoring-table-wrapper {
+    @apply max-h-[40vh];
+  }
+  .ant-table-thead > tr > th,
+  .ant-table-tbody > tr > td {
+    @apply text-sm;
+  }
+  .admin-monitoring-table .ant-table-thead > tr > th {
+    @apply leading-4; 
+  }
+  .ant-tabs-nav {
+    @apply flex flex-wrap justify-center;
+  }
+  .ant-tabs-tab {
+    @apply flex-1 text-center;
+  }
+  .ant-tabs-tab-btn {
+    @apply text-sm;
+  }
+  .admin-dashboard-content {
+    @apply ml-0;
+  }
+  .admin-header-container {
+    @apply flex-col justify-center items-center text-center mt-4;
+  }
+  .admin-dashboard-container {
+    @apply w-[100vw] mr-10;
+  }
+  .admin-myt-logo {
+    @apply w-36 h-auto;
+  }
+}
+
+@media (max-width: 480px) {
+  html, body {
+    @apply h-full overflow-y-auto overflow-x-hidden;
+  }
+  .admin-header-container {
+    @apply w-full flex-col justify-center items-center text-center;
+    margin: 0 !important;
+    padding: 0 !important;
+    box-sizing: border-box;
+  }
+  .admin-header-text h2 {
+    @apply text-sm font-bold text-gray-800;
+    margin: 0;
+  }
+  .admin-header-text p {
+    @apply text-xs text-gray-800;
+    margin: 0;
+  }
+  .admin-dashboard-container {
+    @apply w-full flex flex-row justify-center min-h-screen;
+    margin-top: 0;
+  }
+  .admin-dashboard-content {
+    @apply m-0 p-2.5;
+  }
+  .ant-table {
+    @apply overflow-x-auto min-w-[600px] overflow-y-hidden;
+  }
+  .ant-table-thead > tr > th,
+  .ant-table-tbody > tr > td {
+    @apply text-xs;
+  }
+  .admin-title-header {
+    @apply text-sm m-0;
+  }
+  .admin-monitoring-table-wrapper {
+    @apply max-h-[40vh];
+  }
+  .admin-header-container {
+    width: 100% !important;
+    padding-left: 15px;
+    padding-right: 15px;
+    margin-top: 0 !important;
+  }
+  .admin-dashboard-container.expanded .admin-dashboard-content {
+    @apply ml-[58vw];
+  }
+  .admin-dashboard-container.expanded .admin-myt-logo {
+    margin-top: 10px;
+    margin-left: 28px;
+  }
+  .admin-header-text h2 {
+    font-size: 14px;
+  }
+  .admin-header-text p {
+    font-size: 12px;
+  }
+  .admin-monitoring-table-wrapper {
+    @apply max-h-[40vh];
+    overflow-x: auto;
+  }
+  .ant-table-thead > tr > th,
+  .ant-table-tbody > tr > td {
+    font-size: 12px;
+  }
+  .admin-myt-logo {
+    @apply w-32 h-auto;
+  }
+  .admin-dashboard-container {
+    @apply w-[100vw] mr-6;
+  }
+  .admin-myt-logo {
+    margin-top: 55px !important;
+    margin-left: 28px;
+  }
+}
+
+@media (max-width: 360px) {
+  html, body {
+    @apply h-full overflow-auto;
+  }
+  .admin-header-container {
+    @apply w-full flex-col justify-center items-center text-center;
+    margin: 0 !important;
+    padding: 0 !important;
+    box-sizing: border-box;
+  }
+  .admin-header-text h2 {
+    @apply text-sm font-bold text-gray-800;
+    margin: 0;
+  }
+  .admin-header-text p {
+    @apply text-xs text-gray-800;
+    margin: 0;
+  }
+  .admin-dashboard-container {
+    @apply w-full flex flex-row justify-center min-h-screen;
+    margin-top: 0;
+  }
+  .admin-dashboard-content {
+    @apply m-0 p-2.5;
+  }
+  .ant-table {
+    @apply overflow-x-auto min-w-[600px] overflow-y-hidden;
+  }
+  .ant-table-thead > tr > th,
+  .ant-table-tbody > tr > td {
+    @apply text-xs;
+  }
+  .admin-title-header {
+    @apply text-sm m-0;
+  }
+  .admin-monitoring-table-wrapper {
+    @apply max-h-[40vh];
+  }
+  .admin-header-container {
+    width: 100% !important;
+    padding-left: 15px;
+    padding-right: 15px;
+    margin-top: 0 !important;
+  }
+  .admin-dashboard-container.expanded .admin-dashboard-content {
+    @apply ml-[68vw];
+  }
+  .admin-dashboard-container.expanded .admin-myt-logo {
+    margin-top: 10px;
+    margin-left: 28px;
+  }
+  .admin-header-text h2 {
+    font-size: 14px;
+  }
+  .admin-header-text p {
+    font-size: 12px;
+  }
+  .admin-monitoring-table-wrapper {
+    @apply max-h-[40vh];
+    overflow-x: auto;
+  }
+  .ant-table-thead > tr > th,
+  .ant-table-tbody > tr > td {
+    font-size: 12px;
+  }
+  .admin-myt-logo {
+    @apply w-32 h-auto;
+  }
+  .admin-dashboard-container {
+    @apply w-[100vw] mr-6;
+  }
+  .admin-myt-logo {
+    margin-top: 55px !important;
+    margin-left: 28px;
+  }
+}
