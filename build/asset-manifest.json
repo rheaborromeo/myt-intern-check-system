@@ -1,0 +1,19 @@
+{
+  "files": {
+    "main.css": "/static/css/main.660d0429.css",
+    "main.js": "/static/js/main.7bc667d0.js",
+    "static/js/453.c4f51d42.chunk.js": "/static/js/453.c4f51d42.chunk.js",
+    "static/media/Time management.png": "/static/media/Time management.9daa08211baddfac9641.png",
+    "static/media/myt logo.png": "/static/media/myt logo.d51e67ca4d4eeea6450b.d51e67ca4d4eeea6450b.png",
+    "static/media/inchck_logo.png": "/static/media/inchck_logo.99279c26a39146db9574.png",
+    "static/media/logo_.png": "/static/media/logo_.362ebce4addc31b0b113.png",
+    "index.html": "/index.html",
+    "main.660d0429.css.map": "/static/css/main.660d0429.css.map",
+    "main.7bc667d0.js.map": "/static/js/main.7bc667d0.js.map",
+    "453.c4f51d42.chunk.js.map": "/static/js/453.c4f51d42.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.660d0429.css",
+    "static/js/main.7bc667d0.js"
+  ]
+}
