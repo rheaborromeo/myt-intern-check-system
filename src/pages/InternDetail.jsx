@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import { CloseOutlined } from "@ant-design/icons"; 
 import { getRequest } from "../utils/apicalls";
 import { Pagination } from "antd";
 import "../styles/interndetail.css";
+import { CloseOutlined } from "@ant-design/icons";
 import mytLogo from "../image/myt logo.d51e67ca4d4eeea6450b.png";
 
 const InternDetail = () => {
@@ -12,7 +12,7 @@ const InternDetail = () => {
   const [timesheets, setTimesheets] = useState([]);
   const [loading, setLoading] = useState(true);
   const [currentPage, setCurrentPage] = useState(1);
-  const [pageSize] = useState(20); // Number of records per page
+  const [pageSize] = useState(20);
   const token = localStorage.getItem("authToken");
   const navigate = useNavigate();
 
@@ -58,8 +58,13 @@ const InternDetail = () => {
     setCurrentPage(page);
   };
 
-  // Slice timesheets for pagination
   const paginatedTimesheets = timesheets.slice((currentPage - 1) * pageSize, currentPage * pageSize);
+
+  //  Calculate total hours
+  const totalHours = timesheets.reduce((sum, ts) => {
+    const hours = parseFloat(ts.total_hours);
+    return sum + (isNaN(hours) ? 0 : hours);
+  }, 0);
 
   return (
     <div className="dtr-container">
@@ -140,7 +145,7 @@ const InternDetail = () => {
                     <td>{ts.total_hours || ""}</td>
                     <td>
                       {ts.approved_by && ts.approved_on
-                        ? `${ts.approved_by.split(" ").slice(-1)[0]} (${formatDate(ts.approved_on)})`
+                        ? `${ts.approved_by} (${formatDate(ts.approved_on)})`
                         : ts.approved_by || ""}
                     </td>
                   </tr>
@@ -156,6 +161,11 @@ const InternDetail = () => {
           </table>
         </div>
 
+        {/* ✅ Total Hours Section */}
+        <div className="dtr-total-hours">
+          <strong>Total Hours Rendered:</strong> {totalHours.toFixed(2)}
+        </div>
+
         {/* Pagination */}
         <div className="intern-pagination-container">
           <Pagination
@@ -163,7 +173,7 @@ const InternDetail = () => {
             pageSize={pageSize}
             total={timesheets.length}
             onChange={handlePageChange}
-            showSizeChanger={false} // Disable page size changer
+            showSizeChanger={false}
           />
         </div>
       </div>

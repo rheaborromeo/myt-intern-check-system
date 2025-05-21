@@ -234,6 +234,10 @@ html, body {
     @apply text-sm;
   }
 
+  .total-hours-container {
+    @apply justify-start;
+  }
+
   .attendance-title {
     @apply text-lg font-bold uppercase mt-3 text-center;
   }

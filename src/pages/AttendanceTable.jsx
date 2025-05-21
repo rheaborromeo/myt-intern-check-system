@@ -6,7 +6,7 @@ import Sidebar from "../components/Sidebar";
 import "../styles/attendancetable.css";
 import mytLogo from "../image/myt logo.d51e67ca4d4eeea6450b.png";
 
-const AttendanceTable= () => {
+const AttendanceTable = () => {
   const [collapsed, setCollapsed] = useState(false);
   const [attendanceData, setAttendanceData] = useState([]);
   const [pagination, setPagination] = useState({ page: 1, pageSize: 10 });
@@ -25,7 +25,6 @@ const AttendanceTable= () => {
   }, [pagination.page, pagination.pageSize]);
 
   useEffect(() => {
-
     fetchStudentInfo();
   }, []);
 
@@ -33,11 +32,11 @@ const AttendanceTable= () => {
     setLoading(true);
     const email = localStorage.getItem("email");
     const id = localStorage.getItem("requester");
-    const token = localStorage.getItem("authToken");
+   
 
     try {
       const response = await getRequest(
-        `timesheets/attendance?id=${id}&email=${email}&token=${token}&page=${page}&pageSize=${pageSize}`
+        `timesheets/attendance?id=${id}&email=${email}&page=${page}&pageSize=${pageSize}`
       );
       if (response?.status === "success" && Array.isArray(response.data)) {
         setAttendanceData(response.data);
@@ -46,13 +45,6 @@ const AttendanceTable= () => {
           pageSize: response.pagination.pageSize,
         });
         setHasNextPage(response.pagination.hasNextPage);
-
-        const estimatedTotal =
-          response.pagination.totalRecords ||
-          (response.data.length < pageSize && !response.pagination.hasNextPage
-            ? (page - 1) * pageSize + response.data.length
-            : (page + 1) * pageSize);
-        setTotalRecords(estimatedTotal);
 
         checkIfTimedOut(response.data);
       } else {
@@ -75,18 +67,18 @@ const AttendanceTable= () => {
     const email = localStorage.getItem("email");
     const id = localStorage.getItem("requester");
     const token = localStorage.getItem("authToken");
-  
+
     try {
       const response = await getRequest(
         `timesheets/get_approved_interns_timesheets?id=${id}&email=${email}&token=${token}`
       );
-  
+
       if (response?.data) {
         setStudentInfo({
           name: response.data.name,
           school: response.data.school,
         });
-  
+
         if (Array.isArray(response.data.timesheets)) {
           setApprovedTimesheets(response.data.timesheets);
         }
@@ -95,7 +87,6 @@ const AttendanceTable= () => {
       console.error("Failed to fetch student info", error);
     }
   };
-  
 
   const checkIfTimedOut = (data) => {
     const today = new Date().toISOString().split("T")[0];
@@ -146,11 +137,9 @@ const AttendanceTable= () => {
     );
     setTotalApprovedHours(total.toFixed(2));
   }, [approvedTimesheets]);
-  
 
   const handlePrint = () => {
     const approvedData = approvedTimesheets;
-
 
     const totalApprovedHours = approvedData.reduce(
       (sum, record) => sum + (parseFloat(record.total_hours) || 0),
@@ -169,7 +158,7 @@ const AttendanceTable= () => {
         font-family: Arial, sans-serif;
         margin: 0;
         padding: 0;
-        font-size: 14px; /* Default font size for web view */
+        font-size: 14px; 
       }
       .header {
         display: flex;
@@ -226,7 +215,7 @@ const AttendanceTable= () => {
       @media print {
         body {
           padding: 10mm;
-          font-size: 12pt; /* Slightly smaller font size for print */
+          font-size: 12pt; 
           margin: 0;
         }
 
@@ -242,7 +231,7 @@ const AttendanceTable= () => {
         }
 
         .title {
-          font-size: 20px; /* Adjusted for print */
+          font-size: 20px;
           margin: 15px 0;
         }
 
@@ -347,7 +336,7 @@ const AttendanceTable= () => {
                   })();
 
                   const approvedBy = record.approved_by
-                    ? `${record.approved_by.split(" ").pop()} (${new Date(
+                    ? `${record.approved_by} (${new Date(
                         record.approved_on
                       ).toLocaleDateString("en-US")})`
                     : "";
@@ -419,7 +408,7 @@ const AttendanceTable= () => {
         const am = record.am_modality !== "Absent" ? record.am_modality : "";
         const pm = record.pm_modality !== "Absent" ? record.pm_modality : "";
         if (am && pm && am === pm) return am;
-        return [am, pm].filter(Boolean).join(" / ") || "-";
+        return [am, pm].filter(Boolean).join(" / ") || "";
       },
     },
     {
@@ -472,19 +461,14 @@ const AttendanceTable= () => {
     },
     {
       title: "Approved by",
+      dataIndex: "approved_by_name",
       key: "approved_by_name",
-      render: (record) => {
-        const lastName = record.approved_by_name
-          ? record.approved_by_name.split(" ").pop()
-          : "-";
-        const approvedOn = record.approved_on
-          ? new Date(record.approved_on).toLocaleDateString("en-US", {
-              year: "numeric",
-              month: "long",
-              day: "numeric",
-            })
+      render: (text, record) => {
+        return record.approved_by_name
+          ? `${record.approved_by_name} (${new Date(
+              record.approved_on
+            ).toLocaleDateString("en-US")})`
           : "";
-        return approvedOn ? `${lastName} (${approvedOn})` : "";
       },
     },
   ];
@@ -540,36 +524,30 @@ const AttendanceTable= () => {
 
           <div className="total-hours-container mt-4">
             <h3 className="text-base font-medium">
-              Rendered Hours: {totalApprovedHours} hrs.
+              Total Hours Rendered: {totalApprovedHours} hrs.
             </h3>
           </div>
 
-          <div className="pagination-container mt-4 flex flex-wrap gap-4 items-center">
-            <Select
-              defaultValue={pagination.pageSize}
-              value={pagination.pageSize}
-              onChange={(value) =>
-                setPagination((prev) => ({
-                  ...prev,
-                  pageSize: value,
-                  page: 1,
-                }))
-              }
-              style={{ width: 120 }}
-              className="custom-select"
-            >
-              {[10, 20, 30, 40, 50].map((size) => (
-                <Select.Option key={size} value={size}>
-                  {size} / page
-                </Select.Option>
-              ))}
-            </Select>
+          <div className="pagination-container mt-4 flex flex-wrap items-center">
             <Pagination
               current={pagination.page}
               pageSize={pagination.pageSize}
-              total={totalRecords}
+              total={
+                hasNextPage
+                  ? (pagination.page + 1) * pagination.pageSize
+                  : pagination.page * pagination.pageSize
+              } // Adjust total to reflect the next page
               onChange={(page, pageSize) => setPagination({ page, pageSize })}
-              showSizeChanger={false}
+              showSizeChanger={true}
+
+              itemRender={(page, type, originalElement) => {
+                if (type === "page") {
+                  return page === pagination.page ? (
+                    <span>{page}</span> // Only show the current page number
+                  ) : null; // Hide other page numbers
+                }
+                return originalElement;
+              }}
             />
           </div>
         </Spin>

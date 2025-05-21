@@ -131,6 +131,14 @@
   vertical-align: middle;
 }
 
+.dtr-total-hours {
+  margin-top: 20px;
+  font-size: 16px;
+  text-align: right;
+  
+}
+
+
 .go-back-container {
   margin-bottom: 20px;
 }

@@ -14,18 +14,17 @@ const InternsTable = () => {
   const [reload, setReload] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
   const [pageSize, setPageSize] = useState(10);
+  const [totalSize, setTotalSize] = useState(0); // new state for backend 'size'
   const navigate = useNavigate();
 
   const fetchInterns = async () => {
     setLoading(true);
-    const token = localStorage.getItem("authToken");
-    const requester = localStorage.getItem("requester");
-
     try {
-      const response = await getRequest(`interns/get?token=${token}&requester=${requester}`);
+      const response = await getRequest(`interns/get`);
 
       if (response?.status === "failed") {
         setUserData([]);
+        setTotalSize(0);
       } else if (Array.isArray(response?.data)) {
         const transformed = response.data.map((intern) => ({
           id: intern.id,
@@ -37,11 +36,14 @@ const InternsTable = () => {
           type: intern.type || "N/A",
         }));
         setUserData(transformed);
+        setTotalSize(response.size || transformed.length); // set total size
       } else {
         setUserData([]);
+        setTotalSize(0);
       }
     } catch (err) {
       setUserData([]);
+      setTotalSize(0);
     } finally {
       setLoading(false);
     }
@@ -108,13 +110,11 @@ const InternsTable = () => {
   );
 
   return (
-    <div
-      className={`list-record-container ${collapsed ? "collapsed" : "expanded"}`}
-    >
+    <div className={`list-record-container ${collapsed ? "collapsed" : "expanded"}`}>
       <AdminSidebar collapsed={collapsed} onCollapse={setCollapsed} />
 
       <div className="list-dashboard-content overflow-y-auto p-4">
-      <div className={`list-header-container ${collapsed ? "" : "expanded-sidebar"}`}>
+        <div className={`list-header-container ${collapsed ? "" : "expanded-sidebar"}`}>
           <img src={mytLogo} alt="MYT Logo" className="list-myt-logo" />
           <div className="list-header-text">
             <h2 className="list-company-name text-xl font-bold">
@@ -157,14 +157,19 @@ const InternsTable = () => {
           </Spin>
         </div>
 
-        <div className="pagination-container mt-4">
+        <div className="pagination-container mt-7">
           <Pagination
             current={currentPage}
             pageSize={pageSize}
-            total={userData.length}
+            total={totalSize}
             onChange={handlePageChange}
-            showSizeChanger
-            pageSizeOptions={["10", "20", "30"]}
+            showSizeChanger={false}
+            itemRender={(page, type, originalElement) => {
+              if (type === "page") {
+                return page === currentPage ? <span>{page}</span> : null;
+              }
+              return originalElement;
+            }}
           />
         </div>
       </div>

@@ -17,32 +17,60 @@ const AdminDashboard = () => {
   });
   const [loading, setLoading] = useState(false);
   const [selectedRecords, setSelectedRecords] = useState({});
-  const [pagination, setPagination] = useState({ offset: 0, limit: 10 });
+  const [pagination, setPagination] = useState({ 
+    offset: 0, 
+    pageSize: 10,
+    total: 0  // Added total count
+  });
+  const [hasNextPage, setHasNextPage] = useState(false); // Add hasNextPage state
   const [activeTab, setActiveTab] = useState("pending");
 
   useEffect(() => {
-    fetchAttendance(activeTab, pagination.offset, pagination.limit);
-  }, [activeTab, pagination]);
+    fetchAttendance(activeTab, pagination.offset, pagination.pageSize);
+  }, [activeTab, pagination.offset, pagination.pageSize]);
 
   const fetchAttendance = async (
     status = "pending",
     offset = 0,
-    limit = 10
+    pageSize = 10,
+    page
   ) => {
     setLoading(true);
-    try {
-      const token = localStorage.getItem("authToken");
-      const requester = localStorage.getItem("requester");
-      const url = `timesheets/get_timesheets_by_status?token=${token}&requester=${requester}&status=${status}&offset=${offset}&limit=${limit}`;
 
+    try {
+      const url = `timesheets/get_timesheets_by_status?status=${status}&offset=${offset}&pageSize=${pageSize}`;
       const response = await getRequest(url);
-      if (response && response.data) {
+      if (response?.status === "success") {
+        // Update data with response data
         setData((prevData) => ({
           ...prevData,
-          [status]: response.data,
+          [status]: response.data || [],
+        }));
+        
+        // Update pagination information
+        setHasNextPage(response.has_next_page || false);
+        
+        // If size is provided, update total count for pagination
+        if (response.size !== undefined) {
+          setPagination(prev => ({
+            ...prev,
+            total: response.size
+          }));
+        }
+
+        const estimatedTotal =
+          response.size ||
+          (response.data.length < pageSize && !response.has_next_page
+            ? (pageSize) * pageSize + response.data.length
+            : (pageSize) * pageSize);
+            
+        setPagination(prev => ({
+          ...prev,
+          total: estimatedTotal
         }));
       }
     } catch (error) {
+      console.error("Error fetching attendance data:", error);
     } finally {
       setLoading(false);
     }
@@ -67,7 +95,7 @@ const AdminDashboard = () => {
         timesheet_ids: approvedIds,
       });
       message.success("Selected records approved successfully.");
-      fetchAttendance("pending", pagination.offset, pagination.limit);
+      fetchAttendance("pending", pagination.offset, pagination.pageSize);
       setSelectedRecords({});
     } catch (error) {
       message.error("Failed to approve records.");
@@ -89,7 +117,7 @@ const AdminDashboard = () => {
         timesheet_ids: disapprovedIds,
       });
       message.success("Selected records disapproved successfully.");
-      fetchAttendance("pending", pagination.offset, pagination.limit);
+      fetchAttendance("pending", pagination.offset, pagination.pageSize);
       setSelectedRecords({});
     } catch (error) {
       message.error("Failed to disapprove records.");
@@ -130,7 +158,7 @@ const AdminDashboard = () => {
         };
         const am = formatModality(record.am_modality || "").trim();
         const pm = formatModality(record.pm_modality || "").trim();
-        if (!am && !pm) return "-";
+        if (!am && !pm) return "";
         if (am && pm && am.toLowerCase() === pm.toLowerCase()) return am;
         if (!am) return pm;
         if (!pm) return am;
@@ -187,13 +215,26 @@ const AdminDashboard = () => {
   const renderPagination = () => (
     <div className="mt-4 flex justify-start lg:justify-end">
       <Pagination
-        current={pagination.offset / pagination.limit + 1}
-        pageSize={pagination.limit}
-        total={data[activeTab]?.length || 0}
-        onChange={(page, pageSize) => {
-          setPagination({ offset: (page - 1) * pageSize, limit: pageSize });
-        }}
-      />
+      current={pagination.offset / pagination.pageSize + 1}
+      pageSize={pagination.pageSize}
+      total={hasNextPage ? pagination.total + 1 : pagination.total}
+      onChange={(page, pageSize) => {
+        setPagination(prev => ({
+          ...prev,
+          offset: (page - 1) * pageSize,
+          pageSize: pageSize
+        }));
+      }}
+      showSizeChanger={true}
+      itemRender={(page, type, originalElement) => {
+        if (type === 'page') {
+          // Show only the current page
+          const currentPage = pagination.offset / pagination.pageSize + 1;
+          return page === currentPage ? <span>{page}</span> : null;
+        }
+        return originalElement;
+      }}
+    />
     </div>
   );
 
@@ -226,7 +267,14 @@ const AdminDashboard = () => {
         <Tabs
           type="card"
           activeKey={activeTab}
-          onChange={(key) => setActiveTab(key)}
+          onChange={(key) => {
+            setActiveTab(key);
+            // Reset pagination when changing tabs
+            setPagination(prev => ({
+              ...prev,
+              offset: 0
+            }));
+          }}
           className="mt-4"
         >
           <TabPane tab="Pending" key="pending">
@@ -254,7 +302,7 @@ const AdminDashboard = () => {
               </Checkbox>
 
               {/* Buttons for medium and up */}
-              <div className=" hidden md:flex gap-2 ">
+              <div className="hidden md:flex gap-2">
                 <Button type="primary" onClick={approveSelected}>
                   Approve
                 </Button>
@@ -324,10 +372,10 @@ const AdminDashboard = () => {
                   {
                     title: "Approved By",
                     key: "approved_by",
-                    dataIndex: "approved_by",
+                    dataIndex: "approved_by_name",
                     width: 100,
                     render: (_, record) => {
-                      const approver = record.approved_by;
+                      const approver = record.approved_by_name;
                       const approvedOn = record.approved_on
                         ? new Date(record.approved_on).toLocaleDateString(
                             "en-US",
@@ -338,7 +386,7 @@ const AdminDashboard = () => {
                             }
                           )
                         : "";
-                      return approver ? `${approver} (${approvedOn})` : "-";
+                      return approver ? `${approver} (${approvedOn})` : "";
                     },
                   },
                 ]}
@@ -363,6 +411,23 @@ const AdminDashboard = () => {
                     width: 50,
                   },
                   ...columnsBase,
+                  {
+                    title: "Disapproved By",
+                    key: "disapproved_by_name",
+                    dataIndex: "disapproved_by_name",
+                    width: 100,
+                    render: (_, record) => {
+                      const disapprover = record.disapproved_by_name;
+                      const disapprovedOn = record.disapproved_on
+                        ? new Date(record.disapproved_on).toLocaleDateString("en-US", {
+                            year: "numeric",
+                            month: "long",
+                            day: "numeric",
+                          })
+                        : "";
+                      return disapprover ? `${disapprover} (${disapprovedOn})` : "";
+                    },
+                  },
                 ]}
                 dataSource={data.disapproved}
                 rowKey="id"
